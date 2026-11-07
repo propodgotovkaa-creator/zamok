@@ -1,0 +1,2 @@
+Built-in imagegen edit of assets/lyova.png, output assets/lyova-happy.png.
+Preserve the original fox identity, painted style, orange fur, blue coat, gold scarf and brown backpack. Same full-body three-quarter facing-right framing, feet planted. Change to a happy victory pose: paws out of pockets near chest, warm delighted smile and bright eyes. No waving, no jumping, no new accessories, transparent background.
