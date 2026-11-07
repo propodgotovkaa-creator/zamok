@@ -1,0 +1,2 @@
+Built-in imagegen. Reference: assets/snail.png. Output: assets/lab-snail-wrong.png.
+Edit this exact snail illustration: replace ONLY the brown spiral shell on its back (left half) with one large bright yellow LEMON, oval lemon with subtly dimpled peel and pointed ends, no spiral and no shell visible. Keep snail head, eyes, smile, body, pose and position exactly unchanged, same canvas dimensions and transparent background. Painterly storybook style matching original. No text, no extra objects.
