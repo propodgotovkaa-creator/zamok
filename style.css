@@ -38,7 +38,14 @@
 .potion-surface{position:absolute;left:18%;top:8%;width:64%;height:16%;border-radius:50%;overflow:hidden;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 45% 55%,#78f2d9,#17aeb5 45%,#075d75);box-shadow:inset 0 -.4cqw .8cqw #05394b}.brewing .potion-surface{opacity:.92}.liquid-swirl{position:absolute;inset:-50%;border-radius:50%;background:repeating-radial-gradient(ellipse at 40% 60%,transparent 0 8%,#a4ffeb55 10%,transparent 13% 22%);animation:liquid-roll 2.2s linear infinite}.brew-bubbles{left:19%;top:7%;width:62%;height:18%;border-radius:50%;overflow:hidden}.brew-bubbles i{bottom:auto;width:var(--bubble-size);height:var(--bubble-size);border:0;background:radial-gradient(circle at 30% 25%,#edfffbdc 0 8%,#88eedd99 17%,#178ba2aa 55%,#053c6688 70%);box-shadow:inset -.1cqw -.15cqw .2cqw #07516588;border-radius:50%;animation:bubble-pop 1s infinite}.brew-bubbles i:after{content:'';position:absolute;inset:-35%;border:1px solid #b7fff6aa;border-radius:50%;opacity:0;animation:surface-ripple 1s infinite;animation-duration:inherit;animation-delay:inherit}@keyframes liquid-roll{50%{transform:rotate(180deg) scale(1.1,.8)}100%{transform:rotate(360deg)}}@keyframes bubble-pop{0%{transform:scale(.15);opacity:0}20%{opacity:.8}65%{transform:scale(1);opacity:1}78%{transform:scale(1.1,.35);opacity:.7}100%{transform:scale(1.6,.15);opacity:0}}@keyframes surface-ripple{65%{opacity:0;transform:scale(.5)}80%{opacity:.65}100%{opacity:0;transform:scale(1.8,.5)}}#lab-shard{left:46%;top:16%;width:13%;height:23%;animation:from-potion 2.4s ease-out both,float-shard 2.5s 2.4s infinite}@keyframes from-potion{0%{transform:translateY(10cqw) scale(.05);opacity:0}20%{opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}.event-snail.correcting .wrong{transform:scale(.88) rotate(-7deg);filter:brightness(1.5)}.event-snail.correcting .right{animation:snail-awake 2.5s}@keyframes snail-awake{45%{transform:translateX(1cqw)}100%{transform:none}}
 
 /* Flasks sit within the table edge; poured bottles leave their original slots empty. */
-.potion:nth-child(3){left:63%}.potion:nth-child(4){left:72%}.potion:nth-child(5){left:81%}
+/* Staggered rows: painted bottle bases land at 63% and 68% of the scene. */
+.potion:nth-child(1){left:18%;top:45%}
+.potion:nth-child(2){left:24%;top:50%}
+.potion:nth-child(3){left:31%;top:45%}
+.potion:nth-child(4){left:66%;top:45%}
+.potion:nth-child(5){left:72%;top:50%}
+.potion:before{content:'';position:absolute;left:24%;bottom:10%;width:52%;height:3%;border-radius:50%;background:#2c1c24;filter:blur(.16cqw);opacity:.4;pointer-events:none}
+.potion.dragging:before,.potion.flying:before{display:none}
 .potion.used,.all-brewed .potion.used,.potion.spent{visibility:hidden;pointer-events:none}
 .potion .bottle-cap{clip-path:inset(0 0 78% 0);filter:hue-rotate(var(--potion-hue));transition:transform .4s ease,opacity .35s}
 .potion.uncorked .bottle{clip-path:inset(22% 0 0 0)}.potion.uncorked .bottle-cap{transform:translateY(-2cqw) rotate(18deg);opacity:0}
