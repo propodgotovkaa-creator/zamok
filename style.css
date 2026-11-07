@@ -91,3 +91,8 @@
 #finale.restored #mirror-glass{opacity:0}
 #mirror-rotate{top:auto;bottom:3%;right:3%;font-size:2cqw;padding:.35cqw .8cqw}
 #mirror-rotate span{font-size:1cqw}
+
+/* Polished silver glass: a continuous reflected hall across the mirror and chips. */
+#mirror-glass:after{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 .8cqw #16263788,inset .12cqw .14cqw .18cqw #f8f4e8aa;pointer-events:none}
+#finale .mirror-slot{background:linear-gradient(125deg,#101b28,#263545 55%,#111c29);filter:none}
+.mirror-piece.placed svg polygon{transition:stroke-opacity .65s;stroke-opacity:.2}
