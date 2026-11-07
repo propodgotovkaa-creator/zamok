@@ -96,3 +96,9 @@
 #mirror-glass:after{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 .8cqw #16263788,inset .12cqw .14cqw .18cqw #f8f4e8aa;pointer-events:none}
 #finale .mirror-slot{background:linear-gradient(125deg,#101b28,#263545 55%,#111c29);filter:none}
 .mirror-piece.placed svg polygon{transition:stroke-opacity .65s;stroke-opacity:.2}
+
+/* Blue mirror with fine bevels on the four loose glass chips. */
+.mirror-piece{filter:drop-shadow(.08cqw .18cqw .08cqw #16365d88) drop-shadow(0 .4cqw .5cqw #06172a44)}
+.mirror-piece.selected{filter:drop-shadow(0 0 .18cqw #dbf4ff) drop-shadow(0 .3cqw .35cqw #12345188)}
+.mirror-piece .glass-bevel{transition:opacity .6s}.mirror-piece.placed .glass-bevel{opacity:0}
+#mirror-glass:after{box-shadow:inset 0 0 .7cqw #28537b66,inset .1cqw .1cqw .2cqw #edfaff99}
