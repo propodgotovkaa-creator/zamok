@@ -1,0 +1,3 @@
+Created with built-in imagegen. Asset: assets/fox-forest-sheet.png
+12 equally sized cells, four columns by three rows. Natural quadruped forest fox cub facing right, russet fur, white chest and tail tip, dark paws, no clothes. Soft painted storybook style. First row: four idle frames with swaying tail. Next two rows: eight successive running frames, identical scale and baseline. Transparent background.
+Second pass: background removal only; preserve all twelve poses, positions and canvas, remove paper and haze to full transparency outside fur.

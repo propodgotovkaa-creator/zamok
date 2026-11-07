@@ -1,5 +1,6 @@
 'use strict';
-window.createGreenhouse = function({hint,chime,noise,saveLocation,refreshShards,finish}) {
+window.createGreenhouse = function({hint:clearHint,chime,noise,saveLocation,refreshShards,finish}) {
+  const hint=()=>{};
   const $=id=>document.getElementById(id), key='logoland-greenhouse-v1';
   const pictures=['ice-word.png','swan.png','frog.png','leaves.png'];
   const pictureBoxes=[[148,13,1233,982,1536,1024],[64,16,1289,993,1536,1024],[29,9,1249,1178,1312,1199],[109,9,1270,997,1536,1024]];
@@ -43,8 +44,8 @@ window.createGreenhouse = function({hint,chime,noise,saveLocation,refreshShards,
   }
   async function awaken(){locked=true;setMatch(false);$('gold-wave').classList.add('shine');$('scene').classList.add('green-awake');chime();await delay(1500);$('tree-shard').hidden=false;locked=false;hint('');}
   $('tree-shard').onclick=async()=>{if(locked||s.shard)return;locked=true;hint('');$('green-lyova').classList.add('walk');$('green-lyova').style.left='39%';await delay(1800);$('green-lyova').classList.remove('walk');s.shard=true;save();refreshShards();$('tree-shard').hidden=true;$('scene').classList.add('green-unlocked');$('green-door').hidden=false;chime();locked=false;hint('');};
-  $('green-door').onclick=async()=>{if(locked||!s.shard)return;locked=true;hint('');$('green-lyova').classList.add('walk');$('green-lyova').style.left='78%';await delay(2300);$('green-lyova').classList.remove('walk');locked=false;stop();finish();};
-  async function enter(){locked=true;saveLocation();$('transition').classList.add('active');await delay(650);$('library').hidden=true;$('menu').hidden=true;$('ending').hidden=true;$('toolbar').hidden=false;$('greenhouse').hidden=false;$('scene').className='scene greenhouse-bg';$('green-lyova').style.left='7%';$('gold-wave').classList.remove('shine');active=true;selected=-1;setMatch(false);build();refreshShards();$('transition').classList.remove('active');lastTime=performance.now();cancelAnimationFrame(frame);frame=requestAnimationFrame(tick);locked=false;noise(.7,.02);hint(s.shard?'Осколок с тобой. Подойди к двери.':s.done.length===4?'Забери осколок внизу.':'Возьми волшебную спичку.',3500);}
+  $('green-door').onclick=async()=>{if(locked||!s.shard)return;locked=true;hint('');await window.runFoxToDoor('green-lyova','green-door');locked=false;stop();finish();};
+  async function enter(){locked=true;clearHint('');saveLocation();$('transition').classList.add('active');await delay(650);$('library').hidden=true;$('menu').hidden=true;$('ending').hidden=true;$('toolbar').hidden=false;$('greenhouse').hidden=false;$('scene').className='scene greenhouse-bg';window.resetForestFox('green-lyova',7);$('gold-wave').classList.remove('shine');active=true;selected=-1;setMatch(false);build();refreshShards();$('transition').classList.remove('active');lastTime=performance.now();cancelAnimationFrame(frame);frame=requestAnimationFrame(tick);locked=false;noise(.7,.02);hint(s.shard?'Осколок с тобой. Подойди к двери.':s.done.length===4?'Забери осколок внизу.':'Возьми волшебную спичку.',3500);}
   function stop(){active=false;cancelAnimationFrame(frame);aim=null;setMatch(false);save();$('greenhouse').hidden=true;$('flower-focus').hidden=true;selected=-1;}
   function reset(){stop();s={done:[],melt:[0,0,0,0],shard:false};save();}
   return {enter,stop,reset,hasShard:()=>s.shard,isBusy:()=>locked};

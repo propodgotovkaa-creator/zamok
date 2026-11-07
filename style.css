@@ -137,3 +137,13 @@
 .flower-3{--plant-ratio:.913872;--picture-x:48%;--picture-y:41.5%}
 .flower .flower-plant>.flower-mini{position:absolute;inset:auto;left:var(--picture-x);top:var(--picture-y);width:32%;height:29%;transform:translate(-50%,-50%);opacity:0;z-index:2;overflow:hidden;pointer-events:none;transition:opacity .9s}
 .flower.thawed .flower-plant>.flower-mini{opacity:1}
+
+/* Hand-painted quadruped: four idle frames and eight running frames. */
+#game .forest-fox{display:block;position:absolute;width:20cqw;height:20cqw;bottom:3%;top:auto;background-image:url('assets/fox-forest-sheet.png');background-size:400% 300%;background-position:0 0;background-repeat:no-repeat;pointer-events:none;transform:none;transition:left 2.2s linear,bottom 2.2s linear;animation:fox-idle 3.2s step-end infinite;filter:drop-shadow(0 .15cqw .12cqw #0a1b3433)}
+#lyova.forest-fox{left:5%}#green-lyova.forest-fox{left:7%}#cave-lyova.forest-fox{left:5%}#lab-lyova.forest-fox{left:3%}
+#game .forest-fox.walk{animation:fox-run .72s step-end infinite}
+#game .forest-fox.happy{animation:fox-idle 2.2s step-end infinite,hop .7s 2}
+#game #final-lyova.forest-fox{left:2%;top:42%;bottom:auto;width:17cqw;height:17cqw}
+@keyframes fox-idle{0%,100%{background-position:0 0}25%{background-position:33.333333% 0}50%{background-position:66.666667% 0}75%{background-position:100% 0}}
+@keyframes fox-run{0%,100%{background-position:0 50%}12.5%{background-position:33.333333% 50%}25%{background-position:66.666667% 50%}37.5%{background-position:100% 50%}50%{background-position:0 100%}62.5%{background-position:33.333333% 100%}75%{background-position:66.666667% 100%}87.5%{background-position:100% 100%}}
+@media(prefers-reduced-motion:reduce){#game .forest-fox,#game .forest-fox.walk,#game .forest-fox.happy{animation:none}}
