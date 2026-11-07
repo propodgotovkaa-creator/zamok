@@ -102,3 +102,27 @@
 .mirror-piece.selected{filter:drop-shadow(0 0 .18cqw #dbf4ff) drop-shadow(0 .3cqw .35cqw #12345188)}
 .mirror-piece .glass-bevel{transition:opacity .6s}.mirror-piece.placed .glass-bevel{opacity:0}
 #mirror-glass:after{box-shadow:inset 0 0 .7cqw #28537b66,inset .1cqw .1cqw .2cqw #edfaff99}
+
+/* Place each stem on its existing painted pedestal; centre pictures within each bloom. */
+#flowers{inset:0;width:100%;height:100%;display:block}
+#flowers .flower{position:absolute;bottom:38.3%;top:auto;width:14%;height:30%;animation:none!important}
+.flower-0{left:22.7%;--plant-ratio:1.078;--picture-x:50%;--picture-y:42%}
+.flower-1{left:38.3%;--plant-ratio:.972;--picture-x:49%;--picture-y:40%}
+.flower-2{left:54%;--plant-ratio:.888;--picture-x:49%;--picture-y:40.5%}
+.flower-3{left:69.7%;--plant-ratio:.905;--picture-x:49%;--picture-y:41.5%}
+.flower-plant{position:absolute;left:0;bottom:0;width:100%;aspect-ratio:var(--plant-ratio);transform-origin:50% 100%;display:block}
+.flower .flower-plant>.petals{object-fit:fill}
+.flower .flower-plant>.flower-mini{inset:auto;left:var(--picture-x);top:var(--picture-y);width:38%;height:34%;transform:translate(-50%,-50%);object-fit:contain}
+.flower.heating .flower-plant,.flower.thawed .flower-plant{animation:petal-sway 3.3s ease-in-out infinite}
+.flower.thawed:nth-child(even) .flower-plant{animation-delay:-1.3s}
+/* The chest image is letterboxed: place a small straight keyhole on its gold plate. */
+.lock-sigil{left:46.5%;top:47.8%;width:7%;height:10.5%;transform:none}
+.lock-sigil .keyhole{display:block;width:100%;height:100%;clip-path:none;background:none;transform:none}
+#master .matching-shard,#tree-shard .matching-shard,#cave-shard .matching-shard,#lab-shard .matching-shard{display:block;width:5.8cqw;height:6.4cqw;margin:auto;padding:0;clip-path:none;background:none;box-shadow:none;transform:none;border:0;border-radius:0;filter:drop-shadow(0 .2cqw .18cqw #16365d88) drop-shadow(0 0 .4cqw #c9efff66)}
+.matching-shard svg{display:block;width:100%;height:100%;overflow:visible}
+#shards .matching-shard{display:block;clip-path:none;background:none;box-shadow:none;border:0;transform:none;border-radius:0;opacity:.25}
+#shards .matching-shard.found{opacity:1;filter:drop-shadow(0 0 .25cqw #c9efff)}
+#focus-hint{left:17%;right:17%;font-size:1.6cqw}
+#sound{display:none!important}
+
+#shards{align-items:center}

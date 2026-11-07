@@ -1,19 +1,23 @@
 'use strict';
+window.mirrorPieces=(()=>{
+ const shapes=[[[13,16],[28,13],[35,26],[26,38],[12,32]],[[66,16],[83,21],[86,36],[73,40],[63,29]],[[20,64],[35,57],[42,71],[34,82],[18,79]],[[67,63],[82,60],[88,75],[78,87],[64,78]]];
+ const bounds=shapes.map(p=>{const xs=p.map(v=>v[0]),ys=p.map(v=>v[1]);return{x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys)};}); function artwork(i,prefix='mirror'){
+ const b=i<0?{x:0,y:0,w:100,h:100}:bounds[i],shape=i<0?[[0,0],[100,0],[100,100],[0,100]]:shapes[i],points=shape.map(p=>p.join(',')).join(' ');
+ const bevel=i<0?'':`<g class="glass-bevel" clip-path="url(#${prefix}-cut-${i})"><polygon points="${points}" fill="none" stroke="url(#${prefix}-edge-${i})" stroke-width="1.6" stroke-linejoin="round"/>${shape.map((p,n)=>{const q=shape[(n+1)%shape.length];return `<path d="M${p.join(' ')} L${q.join(' ')}" fill="none" stroke="${n<2?'#f1fcff':'#467ca7'}" stroke-width=".32" stroke-linecap="round"/>`;}).join('')}</g>`;
+ return `<svg viewBox="${b.x} ${b.y} ${b.w} ${b.h}" preserveAspectRatio="none" aria-hidden="true"><defs><clipPath id="${prefix}-cut-${i}"><polygon points="${points}"/></clipPath><linearGradient id="${prefix}-blue-${i}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="85" y2="100"><stop stop-color="#ccecff"/><stop offset=".28" stop-color="#86bddd"/><stop offset=".48" stop-color="#bfe4f5"/><stop offset=".72" stop-color="#7daed1"/><stop offset="1" stop-color="#517fae"/></linearGradient><linearGradient id="${prefix}-edge-${i}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4fcff"/><stop offset=".35" stop-color="#c6edff"/><stop offset=".55" stop-color="#699cc4"/><stop offset=".8" stop-color="#e4f8ff"/><stop offset="1" stop-color="#3e6e9b"/></linearGradient></defs><g clip-path="url(#${prefix}-cut-${i})"><rect width="100" height="100" fill="url(#${prefix}-blue-${i})"/><path d="M-12 67 L65 -10 L77 -10 L0 67Z" fill="#effaff" opacity=".16"/><path d="M24 110 L110 24" stroke="#e2f4ff" stroke-width="1.4" opacity=".13"/></g>${bevel}</svg>`;
+ }
+
+return {shapes,bounds,artwork};
+})();
 window.createFinale=function({hint,chime,saveLocation,restart}){
  const $=id=>document.getElementById(id),key='logoland-finale-v2';
- const shapes=[[[13,16],[28,13],[35,26],[26,38],[12,32]],[[66,16],[83,21],[86,36],[73,40],[63,29]],[[20,64],[35,57],[42,71],[34,82],[18,79]],[[67,63],[82,60],[88,75],[78,87],[64,78]]];
- const bounds=shapes.map(p=>{const xs=p.map(v=>v[0]),ys=p.map(v=>v[1]);return{x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys)};});
+ const {shapes,bounds,artwork}=window.mirrorPieces;
  let placed=[],angles=[0,0,0,0],selected=0,active=false,drag=null,epoch=0,busy=false;
  try{const s=JSON.parse(sessionStorage.getItem(key));if(s){placed=[...new Set((s.placed||[]).filter(i=>Number.isInteger(i)&&i>=0&&i<4))];if(Array.isArray(s.angles)&&s.angles.length===4)angles=s.angles.map(a=>[0,90,180,270].includes(a)?a:90);}}catch{}
  const save=()=>{try{sessionStorage.setItem(key,JSON.stringify({placed,angles}));}catch{}};
  const room=document.createElement('section');room.id='finale';room.hidden=true;room.setAttribute('aria-label','Собери волшебное зеркало');room.innerHTML='<div id="mirror-glass" aria-hidden="true"></div><div id="mirror-slots"></div><div id="mirror-pieces"></div><p id="mirror-instruction">Верни осколки на пустые места в зеркале.</p><button id="mirror-rotate" aria-label="Повернуть выбранный осколок на четверть оборота">↻ <span>Повернуть</span></button><p id="mirror-feedback" role="status"></p><img id="final-lyova" src="assets/lyova.png" alt="Лёва"><div id="mirror-victory" hidden><h2>Ты расколдовал ледяной замок!</h2><button id="mirror-again" class="gold">Сыграть ещё</button></div>';$('game').append(room);
  const pieces=[];
  $('mirror-glass').innerHTML=artwork(-1);
- function artwork(i){
- const b=i<0?{x:0,y:0,w:100,h:100}:bounds[i],shape=i<0?[[0,0],[100,0],[100,100],[0,100]]:shapes[i],points=shape.map(p=>p.join(',')).join(' ');
- const bevel=i<0?'':`<g class="glass-bevel" clip-path="url(#mirror-cut-${i})"><polygon points="${points}" fill="none" stroke="url(#mirror-edge-${i})" stroke-width="1.6" stroke-linejoin="round"/>${shape.map((p,n)=>{const q=shape[(n+1)%shape.length];return `<path d="M${p.join(' ')} L${q.join(' ')}" fill="none" stroke="${n<2?'#f1fcff':'#467ca7'}" stroke-width=".32" stroke-linecap="round"/>`;}).join('')}</g>`;
- return `<svg viewBox="${b.x} ${b.y} ${b.w} ${b.h}" preserveAspectRatio="none" aria-hidden="true"><defs><clipPath id="mirror-cut-${i}"><polygon points="${points}"/></clipPath><linearGradient id="mirror-blue-${i}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="85" y2="100"><stop stop-color="#ccecff"/><stop offset=".28" stop-color="#86bddd"/><stop offset=".48" stop-color="#bfe4f5"/><stop offset=".72" stop-color="#7daed1"/><stop offset="1" stop-color="#517fae"/></linearGradient><linearGradient id="mirror-edge-${i}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4fcff"/><stop offset=".35" stop-color="#c6edff"/><stop offset=".55" stop-color="#699cc4"/><stop offset=".8" stop-color="#e4f8ff"/><stop offset="1" stop-color="#3e6e9b"/></linearGradient></defs><g clip-path="url(#mirror-cut-${i})"><rect width="100" height="100" fill="url(#mirror-blue-${i})"/><path d="M-12 67 L65 -10 L77 -10 L0 67Z" fill="#effaff" opacity=".16"/><path d="M24 110 L110 24" stroke="#e2f4ff" stroke-width="1.4" opacity=".13"/></g>${bevel}</svg>`;
- }
 
  function target(i){const b=bounds[i];return{x:32.3+(b.x+b.w/2)*.354,y:21.4+(b.y+b.h/2)*.465};}
  function position(i,at){const b=bounds[i],el=pieces[i];el.style.left=(at.x-b.w*.177)+'%';el.style.top=(at.y-b.h*.2325)+'%';el.style.transform=`rotate(${angles[i]}deg)`;}

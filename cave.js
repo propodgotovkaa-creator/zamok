@@ -7,7 +7,7 @@ window.createCave = function({hint,chime,noise,saveLocation,refreshShards,finish
     {position:'в конце слова',words:['соль','самолёт','моль','ключ','медаль','лимон'],answers:['соль','моль','медаль']}
   ];
   const pictures={'лес':'forest-word.png','пальма':'palm-word.png','лебедь':'swan.png','руль':'wheel-word.png','лиса':'fox-word.png','лейка':'watering-can.png','пальто':'coat-word.png','мельница':'mill-word.png','лев':'lion-word.png','соль':'salt.png','линейка':'ruler-word.png','улитка':'snail.png','самолёт':'plane-word.png','моль':'moth-word.png','ключ':'key-ornate.png','медаль':'medal-word.png','лимон':'lemon.png'};
-  const homes=[{x:34,y:81},{x:57,y:84},{x:79,y:80}];
+  const homes=[{x:34,y:73},{x:57,y:75},{x:79,y:72}];
   let s={done:[],found:[[],[],[]],shard:false},active=false,locked=false,drag=null,selected=null,current=null,epoch=0;
   try{const old=JSON.parse(sessionStorage.getItem(storage));if(old){s.found=tasks.map((t,i)=>[...new Set((old.found?.[i]||[]).filter(w=>t.answers.includes(w)))]);s.done=tasks.map((t,i)=>i).filter(i=>s.found[i].length===tasks[i].answers.length);s.shard=old.shard===true&&s.done.length===3;}}catch{}
   const save=()=>{try{sessionStorage.setItem(storage,JSON.stringify(s));}catch{}};
@@ -21,7 +21,7 @@ window.createCave = function({hint,chime,noise,saveLocation,refreshShards,finish
     $('chests').replaceChildren();$('cave-keys').replaceChildren();$('key-hiding').replaceChildren();chests.length=keys.length=0;
     tasks.forEach((task,i)=>{
       const chest=document.createElement('button');chest.type='button';chest.className='chest chest-'+i;chest.dataset.chest=i;
-      chest.innerHTML='<img class="chest-bottom" src="assets/chest-closed.png" alt="" draggable="false"><img class="chest-lid" src="assets/chest-closed.png" alt="" draggable="false"><img class="chest-open" src="assets/chest-open.png" alt="" draggable="false"><span class="lock-sigil"><i class="keyhole"></i></span><img class="chest-front" src="assets/chest-open.png" alt="" draggable="false"><span class="chest-vapor" aria-hidden="true"><img src="assets/cold-mist.png" alt=""><img src="assets/cold-mist.png" alt=""></span>';
+      chest.innerHTML='<img class="chest-bottom" src="assets/chest-closed.png" alt="" draggable="false"><img class="chest-lid" src="assets/chest-closed.png" alt="" draggable="false"><img class="chest-open" src="assets/chest-open.png" alt="" draggable="false"><span class="lock-sigil"><svg class="keyhole" viewBox="0 0 20 30" aria-hidden="true"><path d="M10 2a6 6 0 0 0-3 11.2L4 28h12l-3-14.8A6 6 0 0 0 10 2Z" fill="#182736" stroke="#a87637" stroke-width=".8"/></svg></span><img class="chest-front" src="assets/chest-open.png" alt="" draggable="false"><span class="chest-vapor" aria-hidden="true"><img src="assets/cold-mist.png" alt=""><img src="assets/cold-mist.png" alt=""></span>';
       chest.setAttribute('aria-label',`Сундук ${i+1}: Ль ${task.position}`);
       chest.onclick=()=>{if(s.done.includes(i))return;if(selected===null){hint('Сначала возьми любой ключ.',3500);return;}openLock(i);};
       chests.push(chest);$('chests').append(chest);

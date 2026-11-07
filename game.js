@@ -9,33 +9,15 @@
   const key='logoland-library-v1';
   let state={done:[],shard:false,sound:false,location:1}, current=-1, busy=false, mode='menu', timer, hintTimer;
   let scratch=[], last=null, pointer=null, ctx=$('ice').getContext('2d',{willReadFrequently:true});
-  try {const s=JSON.parse(sessionStorage.getItem(key));if(s && Array.isArray(s.done))state={done:[...new Set(s.done.filter(n=>Number.isInteger(n)&&n>=0&&n<4))],shard:s.shard===true&&s.done.length===4,sound:s.sound===true,location:[2,3,4,5].includes(s.location)&&s.shard?s.location:1};} catch {}
+  try {const s=JSON.parse(sessionStorage.getItem(key));if(s && Array.isArray(s.done))state={done:[...new Set(s.done.filter(n=>Number.isInteger(n)&&n>=0&&n<4))],shard:s.shard===true&&s.done.length===4,sound:false,location:[2,3,4,5].includes(s.location)&&s.shard?s.location:1};} catch {}
   let greenhouse,cave,lab,finale;
   const save=()=>{try{sessionStorage.setItem(key,JSON.stringify(state));}catch{}};
   const delay=ms=>new Promise(r=>setTimeout(r,ms));
-  let audio, musicTimer, melody=0;
-  function tone(freq=660,duration=.6,type='sine',volume=.035){
-    if(!state.sound||!audio)return;
-    const o=audio.createOscillator(),g=audio.createGain();o.type=type;o.frequency.value=freq;
-    g.gain.setValueAtTime(0,audio.currentTime);g.gain.linearRampToValueAtTime(volume,audio.currentTime+.025);g.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+duration);
-    o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+duration);
-  }
-  function noise(duration=.25,volume=.018){
-    if(!state.sound||!audio)return;
-    const b=audio.createBuffer(1,Math.ceil(audio.sampleRate*duration),audio.sampleRate),d=b.getChannelData(0);
-    for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);
-    const s=audio.createBufferSource(),f=audio.createBiquadFilter(),g=audio.createGain();s.buffer=b;f.type='lowpass';f.frequency.value=1200;g.gain.value=volume;s.connect(f);f.connect(g);g.connect(audio.destination);s.start();
-  }
-  function chime(){[523,659,784,1046].forEach((f,i)=>setTimeout(()=>tone(f,1),i*140));}
-  function startAudio(){
-    if(!state.sound)return;
-    try{audio ||= new (window.AudioContext||window.webkitAudioContext)();audio.resume().catch(()=>{});
-      if(!musicTimer)musicTimer=setInterval(()=>{const notes=[261.63,329.63,392,493.88,392,329.63,293.66,392];tone(notes[melody++%notes.length],2.5,'sine',.012);},2000);
-    }catch{}
-  }
-  function updateSound(){$('sound').setAttribute('aria-pressed',String(state.sound));$('sound').setAttribute('aria-label',state.sound?'Выключить звук':'Включить звук');$('sound').querySelector('.slash').hidden=state.sound;}
-  $('sound').onclick=()=>{state.sound=!state.sound;save();updateSound();if(state.sound)startAudio();else{clearInterval(musicTimer);musicTimer=null;audio?.suspend();}};
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)audio?.suspend();else if(state.sound)audio?.resume().catch(()=>{});});
+  // All activities are intentionally silent; speech is guided by the teacher.
+  function tone(){}
+  function noise(){}
+  function chime(){}
+  function startAudio(){}
   for(let i=0;i<28;i++){const p=document.createElement('i');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*90}%;animation-delay:${-Math.random()*8}s;animation-duration:${6+Math.random()*7}s`; $('particles').append(p);}
   function hint(text,timeout=5500){clearTimeout(hintTimer);$('hint').textContent=text;$('hint').hidden=!text;if(timeout)hintTimer=setTimeout(()=>$('hint').hidden=true,timeout);}
   function happy(){$('lyova').classList.remove('happy');void $('lyova').offsetWidth;$('lyova').classList.add('happy');setTimeout(()=>$('lyova').classList.remove('happy'),1400);}
@@ -59,7 +41,7 @@
   }
   function openBook(i){
     if(busy||current!==-1)return;current=i;hint('');$('focus').hidden=false;$('focus-book').classList.remove('opening');$('game').classList.remove('returning');$('word-image').src='assets/'+words[i].file;$('word-image').alt='';scratch=[];
-    const done=state.done.includes(i);$('picture').disabled=!done;$('picture').classList.toggle('ready',done);$('ice').classList.toggle('cleared',done);$('focus-hint').textContent=done?'Эта книга уже ожила. Можно рассмотреть картинку.':'Сотри лёд движением пальца или мышки';drawIce();noise(.35,.02);$('close').focus();
+    const done=state.done.includes(i);$('picture').disabled=!done;$('picture').classList.toggle('ready',done);$('ice').classList.toggle('cleared',done);$('focus-hint').textContent=done?'Придумай предложения с этим словом, а затем нажми на картинку.':'Сотри лёд движением пальца или мышки';drawIce();noise(.35,.02);$('close').focus();
   }
   function closeBook(){if(busy)return;current=-1;pointer=null;last=null;$('focus').hidden=true;$('focus-book').classList.remove('opening');$('game').classList.remove('returning');}
   $('close').onclick=closeBook;
@@ -71,7 +53,7 @@
     if(performance.now()-lastNoise>180){noise(.1,.009);lastNoise=performance.now();}
     if(++checkCount%4===0)checkIce();
   }
-  function checkIce(){const d=ctx.getImageData(0,0,480,580).data;let clear=0,total=0;for(let y=0;y<580;y+=8)for(let x=0;x<480;x+=8){total++;if(d[(y*480+x)*4+3]<60)clear++;}if(clear/total>.92){$('ice').classList.add('cleared');$('picture').disabled=false;$('picture').classList.add('ready');$('focus-hint').textContent='Назови картинку и нажми на неё';tone(880,.9);pointer=null;last=null;}}
+  function checkIce(){const d=ctx.getImageData(0,0,480,580).data;let clear=0,total=0;for(let y=0;y<580;y+=8)for(let x=0;x<480;x+=8){total++;if(d[(y*480+x)*4+3]<60)clear++;}if(clear/total>.92){$('ice').classList.add('cleared');$('picture').disabled=false;$('picture').classList.add('ready');$('focus-hint').textContent='Придумай предложения с этим словом, а затем нажми на картинку.';tone(880,.9);pointer=null;last=null;}}
   $('ice').onpointerdown=e=>{if(busy||$('ice').classList.contains('cleared'))return;pointer=e.pointerId;last=null;$('ice').setPointerCapture(e.pointerId);erase(e);};
   $('ice').onpointermove=erase;
   $('ice').onpointerup=e=>{if(pointer===e.pointerId){erase(e);checkIce();pointer=null;last=null;}};
@@ -91,8 +73,13 @@
   lab=window.createLab({hint,chime,noise,saveLocation:()=>{state.location=4;mode='lab';save();},refreshShards:render,finish:()=>finale.enter()});
   cave=window.createCave({hint,chime,noise,saveLocation:()=>{state.location=3;mode='cave';save();},refreshShards:render,finish:()=>lab.enter()});
   greenhouse=window.createGreenhouse({hint,chime,noise,saveLocation:()=>{state.location=2;mode='greenhouse';save();},refreshShards:render,finish:()=>cave.enter()});
+  ['master','tree-shard','cave-shard','lab-shard'].forEach((id,i)=>{
+    const bounds=window.mirrorPieces.bounds[i],ratio=(bounds.w*.354)/(bounds.h*.465*.5625);
+    const shard=$(id).querySelector('.shard');shard.style.width='5.8cqw';shard.style.height=(5.8/ratio)+'cqw';shard.innerHTML=window.mirrorPieces.artwork(i,'reward-'+i);shard.classList.add('matching-shard');
+    const badge=$('shards').children[i];badge.innerHTML=window.mirrorPieces.artwork(i,'badge-'+i);badge.classList.add('matching-shard');badge.style.width='1.9cqw';badge.style.height=(1.9/ratio)+'cqw';
+  });
   const assets=['finale-room.png','finale-spring.png','lab-snail-wrong.png','lab-room.png','lab-cauldron.png','lab-bottle.png','lab-lion-wrong.png','lab-lion-right.png','lab-deer-wrong.png','lab-deer-right.png','lab-fir-wrong.png','lab-fir-right.png','lab-swan-wrong.png','lab-swan-right.png','lock-painted.png','gear-painted.png','cold-mist.png','forest-word.png','palm-word.png','wheel-word.png','coat-word.png','mill-word.png','lion-word.png','ruler-word.png','plane-word.png','moth-word.png','medal-word.png','cave.png','chest-closed.png','chest-open.png','key-ornate.png','crystal.png','raspberry.png','snail.png','phone.png','salt.png','greenhouse.png','greenhouse-awake.png','flower-bud.png','flower-open.png','flower-rose.png','flower-daisy.png','flower-blue.png','flower-frozen.png','match.png','flame.png','ice-word.png','swan.png','frog.png','leaves.png','ice.png','library.png','library-awake.png','book.png','lyova.png',...words.map(w=>w.file)];
   $('start').disabled=true;
   Promise.all(assets.map(file=>new Promise((resolve,reject)=>{const im=new Image();im.onload=resolve;im.onerror=reject;im.src='assets/'+file;}))).then(()=>$('start').disabled=false).catch(()=>$('load-error').hidden=false);
-  updateSound();render();
+  render();
 })();
