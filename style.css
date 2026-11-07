@@ -141,3 +141,29 @@
 /* Restore the original scarf-and-coat character without experimental animation. */
 #game #lyova,#game #green-lyova,#game #cave-lyova,#game #lab-lyova,#game #final-lyova{animation:none;transition:none;object-fit:contain;object-position:center bottom}
 #game #final-lyova{left:3%;top:auto;bottom:3%;width:18%;height:30%;opacity:1}
+
+/* The laboratory exit opens by itself when its shard is collected. */
+.scene.lab-bg:after{content:'';position:absolute;inset:0;background:url('assets/lab-room-open.png') center/cover no-repeat;clip-path:polygon(82% 14%,100% 14%,100% 79%,82% 79%);opacity:0;transition:opacity 1.8s ease;pointer-events:none}
+.scene.lab-bg.lab-unlocked:after{opacity:1}
+#lab-door{left:85%;right:auto;top:24%;width:14%;height:48%;padding:0;border:0;border-radius:48% 48% 0 0;background:radial-gradient(ellipse,#ffe8a41c,transparent 70%);z-index:5;animation:door-invitation 3s ease-in-out infinite}
+#lab-door span{position:absolute;bottom:1%;left:5%;right:5%;padding:.65cqw .2cqw;border:2px double #d3b477;border-radius:2cqw;background:#173453e8;color:#fff1d1;font-size:1.2cqw}
+@keyframes door-invitation{50%{box-shadow:inset 0 0 2cqw #ffe2a344}}
+/* From a restored mirror to a full spring garden. */
+#spring-garden{position:absolute;inset:0;background:url('assets/finale-spring.png') 50% 40%/282.5% 215% no-repeat;opacity:0;transform:scale(1.08);transition:opacity 2s ease,transform 3s ease;pointer-events:none;z-index:2}
+#finale.in-garden #spring-garden{opacity:1;transform:scale(1)}
+#mirror-aura{position:absolute;left:24%;top:10%;width:52%;height:70%;border-radius:50%;background:radial-gradient(ellipse,#fff7d8cc,transparent 67%);opacity:0;pointer-events:none;z-index:3}
+.restoring #mirror-aura{animation:mirror-awakening 4.3s ease-out both}
+@keyframes mirror-awakening{0%{opacity:0;transform:scale(.3)}28%{opacity:1;transform:scale(1)}60%{opacity:.5;transform:scale(1.7)}100%{opacity:0;transform:scale(2)}}
+#spring-flight{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
+.spring-butterfly{position:absolute;left:49%;top:47%;width:3.3cqw;height:2.5cqw;opacity:0;filter:hue-rotate(var(--wing-hue));}
+.spring-butterfly svg{width:100%;height:100%;overflow:visible}.butterfly-wings{transform-box:fill-box;transform-origin:center;animation:butterfly-wings .45s ease-in-out infinite alternate}
+.restored .spring-butterfly{animation:spring-flight 6s var(--flight-delay) ease-out both}
+.in-garden .spring-butterfly{animation:garden-float 8s var(--flight-delay) ease-in-out infinite}
+@keyframes butterfly-wings{to{transform:scaleX(.35)}}
+@keyframes spring-flight{0%{opacity:0;transform:scale(.25)}12%,70%{opacity:.9}100%{opacity:0;transform:translate(var(--flight-x),var(--flight-y)) scale(.8)}}
+@keyframes garden-float{0%,100%{opacity:0;transform:translate(calc(var(--flight-x)*-.6),15cqw) scale(.7)}20%,75%{opacity:.8}90%{opacity:0;transform:translate(var(--flight-x),-19cqw) scale(.8)}}
+#mirror-victory{z-index:6}#final-story-line{font:500 1.45cqw/1.5 Georgia;margin:0 0 .7cqw;color:#e9f2dc}
+#game #final-lyova{z-index:5}
+.in-garden #mirror-glass,.in-garden #mirror-pieces,.in-garden #mirror-slots{visibility:hidden}
+.in-garden #mirror-victory{left:24%;right:10%;bottom:5%;background:#173d40ed}
+@media(prefers-reduced-motion:reduce){#mirror-aura,.spring-butterfly,.butterfly-wings,#lab-door{animation:none!important}.scene.lab-bg:after,#spring-garden{transition:none}}

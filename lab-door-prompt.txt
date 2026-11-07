@@ -1,0 +1,2 @@
+Built-in imagegen edit of assets/lab-room.png. Output: assets/lab-room-open.png.
+Change only the far-right blue double door: both leaves open inward into a softly illuminated blue-and-gold corridor. Preserve all other architecture, bottles, table and floor pixel-aligned, original painted style, 16:9, no text or characters.
