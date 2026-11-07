@@ -1,0 +1,4 @@
+Generated using built-in imagegen.
+Cold hall: use library.png as style reference. Wide painted blue and antique gold castle alcove, empty rectangular mirror, frosted frame, clear floor, no lettering or characters.
+Spring edit: preserve exact frame and architecture; melt snow and ice; replace mirror interior with flowering spring garden, lilies, bluebells and winding path. Warm daylight through windows.
+Sources: exec-03f43055-c1cf-40d9-a560-5e93abda25a3.png; exec-b37946ab-8244-4dd7-9a8c-1a0639630f3c.png.

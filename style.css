@@ -57,3 +57,27 @@
 @keyframes stream-shimmer{to{transform:scaleX(.75) skewX(1deg)}}@keyframes stream-drops{to{background-position:0 100%}}@keyframes pour-ripple{to{transform:scale(2.3,1.5);opacity:0}}
 .brew-water{position:absolute;left:18%;top:8%;width:64%;height:16%;border-radius:50%;pointer-events:none;opacity:0;transition:opacity .35s;box-shadow:inset 0 -.3cqw .5cqw #052f40}.brewing .brew-water{opacity:.95}.potion-surface{display:none}
 @keyframes from-potion{0%{transform:translateY(4cqw) scale(.05);opacity:0}20%{opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
+/* Finale: four hand-shaped glass fragments, matching the painted mirror opening. */
+#shards>:nth-child(n+5){display:none}
+.scene.finale-bg{background-image:url('assets/finale-room.png')}
+#finale{position:absolute;inset:0;isolation:isolate;touch-action:none}
+#finale:before{content:'';position:absolute;inset:0;background:url('assets/finale-spring.png') center/100% 100%;opacity:0;transition:opacity 3s ease;pointer-events:none}
+#finale.restored:before{opacity:1}
+#mirror-slots,#mirror-pieces{position:absolute;inset:0;pointer-events:none}
+.mirror-slot{position:absolute;padding:0;border:0;background:#b8ddf914;pointer-events:auto;transition:background .3s}
+.mirror-slot:hover,.mirror-slot:focus-visible{background:#bde7ff55}
+.mirror-piece{position:absolute;background:none;border:0;padding:0;touch-action:none;pointer-events:auto;cursor:grab;filter:drop-shadow(0 .3cqw .2cqw #06172a88);transition:transform .3s,filter .3s;transform-origin:center}
+.mirror-piece svg{width:100%;height:100%;overflow:visible;display:block}
+.mirror-piece.selected{filter:drop-shadow(0 0 .35cqw #fff0b9) drop-shadow(0 .3cqw .3cqw #16304b)}
+.mirror-piece.dragging{z-index:10;cursor:grabbing;transition:none}
+.mirror-piece.placed{pointer-events:none;filter:none;transition:opacity 2.5s}
+.restored .mirror-piece.placed{opacity:0}.restored #mirror-slots{display:none}
+#mirror-instruction{position:absolute;top:1.5%;left:20%;right:20%;margin:0;padding:.8cqw 1.8cqw;border:3px double #d3b477;border-radius:1.2cqw;background:#102b46f5;color:#fff2d5;font:600 1.65cqw/1.4 Georgia;text-align:center;box-shadow:0 .3cqw 1cqw #07152566}
+#mirror-rotate{position:absolute;right:3%;top:37%;border:3px double #d3b477;border-radius:1.3cqw;background:#183854ee;color:#fff2d5;font:3cqw Georgia;padding:.6cqw 1.3cqw;box-shadow:0 .3cqw .8cqw #10203688}
+#mirror-rotate span{display:block;font-size:1.3cqw}#mirror-rotate:disabled{opacity:.4}
+#mirror-feedback{position:absolute;bottom:.5%;left:20%;right:20%;margin:0;text-align:center;color:#fff1c9;font:600 1.3cqw Georgia;text-shadow:0 1px 4px #102036;pointer-events:none}
+#final-lyova{position:absolute;left:3%;top:41%;width:16%;height:29%;object-fit:contain;pointer-events:none;opacity:.9}
+.restored #final-lyova{animation:hop .8s 3;opacity:1}
+#mirror-victory{position:absolute;bottom:3%;left:20%;right:20%;text-align:center;padding:1.2cqw;border:3px double #d3b477;border-radius:1.5cqw;background:#12324be8;color:#fff1d0;animation:zoom-in .8s}
+#mirror-victory h2{font:600 2.2cqw Georgia;margin:0 0 1cqw}
+@media(prefers-reduced-motion:reduce){.mirror-piece,#finale:before{transition:none}.restored #final-lyova{animation:none}}
