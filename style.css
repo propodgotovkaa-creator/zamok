@@ -126,3 +126,14 @@
 #sound{display:none!important}
 
 #shards{align-items:center}
+
+/* The rhyme belongs to this room, independent of transient hints and progress. */
+#green-spell{position:absolute;top:12%;left:24%;right:20%;z-index:8;margin:0;padding:.8cqw 1.3cqw;border:3px double #d3b477;border-radius:1.2cqw;background:#102b46f5;color:#fff2d5;text-align:center;box-shadow:inset 0 0 0 .25cqw #1b405a,0 .3cqw 1cqw #07152566;pointer-events:none}
+#green-spell span{display:block;font:500 1.35cqw/1.4 Georgia,serif}
+#green-spell strong{display:block;margin-top:.25cqw;font:600 1.95cqw/1.4 Georgia,serif}
+.flower-0{--plant-ratio:1.094245;--picture-x:49.5%;--picture-y:42%}
+.flower-1{--plant-ratio:1;--picture-x:48.5%;--picture-y:40%}
+.flower-2{--plant-ratio:.913872;--picture-x:48.5%;--picture-y:40.5%}
+.flower-3{--plant-ratio:.913872;--picture-x:48%;--picture-y:41.5%}
+.flower .flower-plant>.flower-mini{position:absolute;inset:auto;left:var(--picture-x);top:var(--picture-y);width:32%;height:29%;transform:translate(-50%,-50%);opacity:0;z-index:2;overflow:hidden;pointer-events:none;transition:opacity .9s}
+.flower.thawed .flower-plant>.flower-mini{opacity:1}
