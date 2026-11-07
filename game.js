@@ -7,10 +7,10 @@
   ];
   const iceTexture=new Image();iceTexture.src='assets/ice.png';
   const key='logoland-library-v1';
-  let state={done:[],shard:false,sound:false,location:1}, current=-1, busy=false, mode='menu', timer, hintTimer;
+  let state={done:[],shard:false,sound:false,location:1,introSeen:false}, current=-1, busy=false, mode='menu', timer, hintTimer;
   let scratch=[], last=null, pointer=null, ctx=$('ice').getContext('2d',{willReadFrequently:true});
-  try {const s=JSON.parse(sessionStorage.getItem(key));if(s && Array.isArray(s.done))state={done:[...new Set(s.done.filter(n=>Number.isInteger(n)&&n>=0&&n<4))],shard:s.shard===true&&s.done.length===4,sound:false,location:[2,3,4,5].includes(s.location)&&s.shard?s.location:1};} catch {}
-  let greenhouse,cave,lab,finale;
+  try {const s=JSON.parse(sessionStorage.getItem(key));if(s && Array.isArray(s.done))state={done:[...new Set(s.done.filter(n=>Number.isInteger(n)&&n>=0&&n<4))],shard:s.shard===true&&s.done.length===4,sound:false,introSeen:s.introSeen===true,location:[2,3,4,5].includes(s.location)&&s.shard?s.location:1};} catch {}
+  let greenhouse,cave,lab,finale,story;
   const save=()=>{try{sessionStorage.setItem(key,JSON.stringify(state));}catch{}};
   const delay=ms=>new Promise(r=>setTimeout(r,ms));
   // All activities are intentionally silent; speech is guided by the teacher.
@@ -31,10 +31,11 @@
     $('start').textContent=state.done.length?'Продолжить приключение':'Начать приключение';$('restart').hidden=!state.done.length;$('restart-room').hidden=state.location===1;$('restart-room').textContent=state.location===5?'Собрать зеркало заново':state.location===4?'Повторить лабораторию':state.location===3?'Повторить пещеру':'Повторить оранжерею';
   }
   async function enter(){if(busy)return;if(state.location===5){startAudio();finale.enter();return;}if(state.location===4){startAudio();await lab.enter();return;}if(state.location===3){startAudio();await cave.enter();return;}if(state.location===2){startAudio();await greenhouse.enter();return;}busy=true;startAudio();$('transition').classList.add('active');await delay(650);mode='library';window.resetForestFox('lyova',5);$('menu').hidden=true;$('ending').hidden=true;$('library').hidden=false;$('toolbar').hidden=false;$('scene').className='scene library-bg';render();$('transition').classList.remove('active');busy=false;noise(.8,.025);hint(state.shard?'Осколок с тобой! Подойди к двери.':state.done.length===4?'В большой книге что-то сияет… Забери осколок!':'Выбери замёрзшую книгу',6500);}
-  function home(){if(busy||greenhouse?.isBusy()||cave?.isBusy()||lab?.isBusy()||finale?.isBusy())return;finale?.stop();lab?.stop();cave?.stop();greenhouse?.stop();closeBook();mode='menu';$('library').hidden=true;$('toolbar').hidden=true;$('ending').hidden=true;$('menu').hidden=false;$('scene').className='scene castle';hint('');render();}
-  function reset(){finale?.reset();lab?.reset();cave?.reset();greenhouse?.reset();state.location=1;state.done=[];state.shard=false;save();$('lyova').style.cssText='';$('lyova').classList.remove('walk');render();enter();}
+  function home(){story?.hide();if(busy||greenhouse?.isBusy()||cave?.isBusy()||lab?.isBusy()||finale?.isBusy())return;finale?.stop();lab?.stop();cave?.stop();greenhouse?.stop();closeBook();mode='menu';$('library').hidden=true;$('toolbar').hidden=true;$('ending').hidden=true;$('menu').hidden=false;$('scene').className='scene castle';hint('');render();}
+  function reset(){finale?.reset();lab?.reset();cave?.reset();greenhouse?.reset();state.location=1;state.done=[];state.shard=false;state.introSeen=false;save();$('lyova').style.cssText='';$('lyova').classList.remove('walk');render();story.show();}
   $('restart-room').onclick=()=>{const room=state.location===5?finale:state.location===4?lab:state.location===3?cave:greenhouse;room.reset();room.enter();};
-  $('start').onclick=enter;$('restart').onclick=reset;$('again').onclick=reset;$('home').onclick=home;$('end-home').onclick=home;
+  story=window.createStoryIntro({finish:()=>{state.introSeen=true;save();enter();},back:home});
+  $('start').onclick=()=>{if(!state.introSeen&&state.location===1&&state.done.length===0)story.show();else enter();};$('restart').onclick=reset;$('again').onclick=reset;$('home').onclick=home;$('end-home').onclick=home;
   function drawIce(){
     const {width:w,height:h}=$('ice');ctx.globalCompositeOperation='source-over';ctx.clearRect(0,0,w,h);
     ctx.drawImage(iceTexture,0,0,w,h);
@@ -79,7 +80,7 @@
     const badge=$('shards').children[i];badge.innerHTML=window.mirrorPieces.artwork(i,'badge-'+i);badge.classList.add('matching-shard');badge.style.width='1.9cqw';badge.style.height=(1.9/ratio)+'cqw';
   });
   window.installForestFoxes();
-  const assets=['lyova-happy.png','lab-room-open.png','lyova.png','finale-room.png','finale-spring.png','lab-snail-wrong.png','lab-room.png','lab-cauldron.png','lab-bottle.png','lab-lion-wrong.png','lab-lion-right.png','lab-deer-wrong.png','lab-deer-right.png','lab-fir-wrong.png','lab-fir-right.png','lab-swan-wrong.png','lab-swan-right.png','lock-painted.png','gear-painted.png','cold-mist.png','forest-word.png','palm-word.png','wheel-word.png','coat-word.png','mill-word.png','lion-word.png','ruler-word.png','plane-word.png','moth-word.png','medal-word.png','cave.png','chest-closed.png','chest-open.png','key-ornate.png','crystal.png','raspberry.png','snail.png','phone.png','salt.png','greenhouse.png','greenhouse-awake.png','flower-bud.png','flower-open.png','flower-rose.png','flower-daisy.png','flower-blue.png','flower-frozen.png','match.png','flame.png','ice-word.png','swan.png','frog.png','leaves.png','ice.png','library.png','library-awake.png','book.png',...words.map(w=>w.file)];
+  const assets=['story-parchment.png','lyova-happy.png','lab-room-open.png','lyova.png','finale-room.png','finale-spring.png','lab-snail-wrong.png','lab-room.png','lab-cauldron.png','lab-bottle.png','lab-lion-wrong.png','lab-lion-right.png','lab-deer-wrong.png','lab-deer-right.png','lab-fir-wrong.png','lab-fir-right.png','lab-swan-wrong.png','lab-swan-right.png','lock-painted.png','gear-painted.png','cold-mist.png','forest-word.png','palm-word.png','wheel-word.png','coat-word.png','mill-word.png','lion-word.png','ruler-word.png','plane-word.png','moth-word.png','medal-word.png','cave.png','chest-closed.png','chest-open.png','key-ornate.png','crystal.png','raspberry.png','snail.png','phone.png','salt.png','greenhouse.png','greenhouse-awake.png','flower-bud.png','flower-open.png','flower-rose.png','flower-daisy.png','flower-blue.png','flower-frozen.png','match.png','flame.png','ice-word.png','swan.png','frog.png','leaves.png','ice.png','library.png','library-awake.png','book.png',...words.map(w=>w.file)];
   $('start').disabled=true;
   Promise.all(assets.map(file=>new Promise((resolve,reject)=>{const im=new Image();im.onload=resolve;im.onerror=reject;im.src='assets/'+file;}))).then(()=>$('start').disabled=false).catch(()=>$('load-error').hidden=false);
   render();

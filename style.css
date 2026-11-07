@@ -168,3 +168,19 @@
 #game .restored #final-lyova{opacity:0}
 .restored #final-lyova-happy{opacity:1}
 @media(prefers-reduced-motion:reduce){#game #final-lyova,#final-lyova-happy{transition:none}}
+
+/* A quiet storybook introduction over the castle backdrop. */
+#story-intro{position:absolute;inset:0;z-index:18;background:linear-gradient(90deg,#10233b55,#10233b22,#10233b55);animation:fade-in .7s}
+#story-back{position:absolute;left:3%;top:4%;z-index:2}
+.story-scroll{position:absolute;left:12%;top:3%;width:76%;height:94%;filter:drop-shadow(0 1cqw 1.8cqw #07182c88);animation:story-arrive .9s ease-out both}
+.story-scroll>img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.story-copy{position:absolute;inset:15% 13% 20%;overflow:auto;color:#49351f;text-align:center;scrollbar-width:thin}
+.story-copy h2{font:500 2.5cqw/1.2 Georgia,'Times New Roman',serif;letter-spacing:.025em;color:#754c24;margin:0 0 1.5cqw}
+.story-copy p{font:400 1.78cqw/1.5 Georgia,'Times New Roman',serif;margin:0 0 1.2cqw;opacity:0;transform:translateY(.7cqw);transition:opacity 1.1s ease,transform 1.1s ease;text-wrap:pretty}
+.story-copy p.visible{opacity:1;transform:none}
+.story-copy p:first-child:first-letter{font-size:1.35em;color:#835a2b}
+.story-actions{position:absolute;left:12%;right:12%;bottom:12%;text-align:center;min-height:3.5cqw}
+.story-actions .text-button{color:#705438;font-size:1.05cqw;margin:.7cqw auto}
+.story-actions .gold{font-size:1.35cqw;animation:fade-in .7s}
+@keyframes story-arrive{from{opacity:0;transform:translateY(2cqw) scale(.96)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#story-intro,.story-scroll,.story-actions .gold{animation:none}.story-copy p{transition:none}}
