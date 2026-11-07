@@ -1,0 +1,64 @@
+{
+  "tool": "built-in imagegen",
+  "reference": "assets/cave.png",
+  "mechanism": [
+    [
+      "lock-painted.png",
+      false,
+      "A landscape 16:9 full-bleed painted game background: the interior of a magical winter castle lock, a huge indigo blue enamel clockwork plate filling the composition, delicate antique gold vine engravings, softly frosted scalloped edges, translucent blue ice on outer corners. A circular recessed dark navy mechanism well at center taking 30 percent width; EMPTY center, no gears because rotating gears added separately. Six broad empty areas around it for floating picture objects. Warm subtle golden lamplight, snowflake details at very edges only. Ornate handpainted fairy tale craft, no rectangular UI cards, no lettering, no words, no numbers, no symbols, no key, no objects covering picture areas. Keep full canvas calm and uncluttered."
+    ],
+    [
+      "gear-painted.png",
+      true,
+      "One ornate circular cogwheel, perfect front view orthographic, centered, isolated on transparent background. 20 chunky mechanical gear teeth, antique gold metal with indigo enamel insets, six elegant curved spokes, delicate engraved winter leaves, a little frost on rim, round small dark axle hole. Hand-painted fairy tale storybook illustration matching an enchanted ice castle. Fine painterly highlights, visible volume and warm gold shading, no photorealism, no plastic, no text, no background, no other objects, no glow. Entire gear fully visible, fills square canvas."
+    ],
+    [
+      "cold-mist.png",
+      true,
+      "One delicate curling plume of pale ice blue vapor emerging from bottom center, drifting upward and outward with wispy translucent edges. Soft hand-painted fairy tale winter magic, a few tiny ice motes, elegant organic curling smoke tendrils, cool white luminous center near bottom fading to transparent above. Isolated transparent background, no chest, no ground, no objects, no text. Sprite used over an open treasure chest."
+    ]
+  ],
+  "pictures": [
+    [
+      "forest-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: A small recognizable lush green forest: a compact group of five leafy deciduous trees and firs of different heights, with a tiny path between their trunks. The Russian target word is лес; no lettering."
+    ],
+    [
+      "palm-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One tropical palm tree with a gracefully curved brown trunk and a crown of long green palm fronds. Full tree, recognizable tropical palm, no island or landscape."
+    ],
+    [
+      "wheel-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One car steering wheel, three-quarter frontal view, navy leather circular rim with three gold trimmed spokes and a central hub. Clearly an automobile steering wheel, not a ship helm or a tire."
+    ],
+    [
+      "coat-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One warm elegant teal blue long winter coat, front view, sleeves hanging naturally, gold buttons, lapels, two pockets, knee length, light fur collar. No person, no hanger."
+    ],
+    [
+      "mill-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One traditional windmill building with four broad crossed wooden sails and a little conical roof, front three-quarter view. Warm cream walls and reddish brown roof, complete building and sails, small grassy base, no scene."
+    ],
+    [
+      "lion-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One friendly adult male lion with a large golden brown mane, tawny body and tufted tail, sitting in a three-quarter view, full animal visible. Recognizable realistic animal proportions but kind expressive storybook face, not a cub, no clothing."
+    ],
+    [
+      "ruler-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One straight wooden school ruler, slight diagonal, warm honey colored wood with clearly painted small measurement tick marks along one edge. No digits or letters, no other objects."
+    ],
+    [
+      "plane-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One recognizable small passenger airplane, three-quarter view, cream fuselage, blue wings and tail, tiny windows. Entire airplane visible, no clouds, no ground, no words or logos."
+    ],
+    [
+      "moth-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One recognizable small clothes moth, beige gray wings held roof-like along a little body, delicate antennae, viewed from above, natural moth proportions. Not a colorful butterfly, not a dragonfly, no clothing, no holes."
+    ],
+    [
+      "medal-word.png",
+      "Use case illustration-story. Single isolated educational picture sprite for a Russian preschool speech game. Smooth hand-painted storybook gouache illustration, carefully shaded natural forms, delicate brush details, rich friendly colors, subtle navy contours, soft warm highlights. Same quality as a beautiful illustrated winter fairy tale; no 3D plastic, no flat vector, no border, no card, no ground shadow, no background, no text. Centered, object fills 85% canvas with safe margins, truly transparent background. Subject: One gold award medal hanging from a folded blue ribbon forming an inverted V. Round embossed golden medallion with a small laurel wreath and star, no writing or digits. Whole ribbon and medal visible."
+    ]
+  ],
+  "output_directory": "assets"
+}

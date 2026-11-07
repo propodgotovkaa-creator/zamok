@@ -1,1 +1,70 @@
-
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101b38">
+  <title>Тайна ледяного замка — Логоленд</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="game" aria-label="Тайна ледяного замка">
+  <div id="scene" class="scene castle"></div><div class="vignette"></div><div id="particles" aria-hidden="true"></div>
+  <header id="toolbar" hidden>
+    <button id="home" class="round" aria-label="В главное меню" title="В главное меню">⌂</button>
+    <div id="shards" aria-label="Найдено осколков: 0 из 5"><i></i><i></i><i></i><i></i><i></i></div>
+    <button id="sound" class="round" aria-label="Включить звук" aria-pressed="false" title="Звук">♪<span class="slash"></span></button>
+  </header>
+  <section id="menu">
+    <div class="menu-copy"><p class="eyebrow">ЛОГОЛЕНД · СКАЗОЧНОЕ ПРИКЛЮЧЕНИЕ</p><h1>Тайна<br>ледяного замка</h1><p class="intro">Помоги Лёве найти осколки<br>волшебного зеркала.</p><button id="start" class="gold">Начать приключение</button><button id="restart-room" class="text-button" hidden>Повторить оранжерею</button><button id="restart" class="text-button" hidden>Начать заново</button><p class="chapter-note">Главы 1–3 · Приключение продолжается</p></div>
+  </section>
+  <section id="library" aria-label="Замёрзшая библиотека" hidden>
+    <div id="room-title"><span>ГЛАВА ПЕРВАЯ</span><h2>Замёрзшая библиотека</h2></div>
+    <div id="books" aria-label="Четыре волшебные книги"></div>
+    <button id="master" aria-label="Забрать осколок зеркала" hidden><span class="shard"></span></button>
+    <button id="door" aria-label="Подойти к открывшейся двери" hidden><span>Дальше</span></button>
+    <img id="lyova" src="assets/lyova.png" alt="Лисёнок Лёва" draggable="false">
+  </section>
+  <section id="greenhouse" aria-label="Ледяная оранжерея" hidden>
+    <div class="green-title"><span>ГЛАВА ВТОРАЯ</span><h2>Ледяная оранжерея</h2></div>
+    <div id="flowers" aria-label="Четыре замёрзших цветка"></div>
+    <div id="held-match" aria-hidden="true" hidden><div class="match-heat"></div><img class="match-wood" src="assets/match.png" alt=""><img class="match-flame" src="assets/flame.png" alt=""></div>
+    <button id="match" aria-label="Взять волшебную спичку" aria-pressed="false"><img src="assets/match.png" alt="" draggable="false"><span>Возьми спичку</span></button>
+    <img id="green-lyova" src="assets/lyova.png" alt="Лисёнок Лёва" draggable="false">
+    <button id="tree-shard" aria-label="Забрать второй осколок зеркала" hidden><span class="shard"></span></button>
+    <button id="green-door" aria-label="Подойти к двери оранжереи" hidden><span>Дальше</span></button>
+    <div id="gold-wave" aria-hidden="true"></div>
+  </section>
+  <section id="cave" aria-label="Пещера хрустальных ключей" hidden>
+    <div class="green-title"><span>ГЛАВА ТРЕТЬЯ</span><h2>Пещера хрустальных ключей</h2></div>
+    <div id="cave-crystals" aria-hidden="true"><img src="assets/crystal.png" alt=""><img src="assets/crystal.png" alt=""><img src="assets/crystal.png" alt=""></div>
+    <div id="chests" aria-label="Три сундука"></div>
+    <div id="cave-keys"></div><div id="key-hiding"></div>
+    <img id="cave-lyova" src="assets/lyova.png" alt="Лисёнок Лёва" draggable="false">
+    <button id="cave-shard" aria-label="Забрать третий осколок зеркала" hidden><span class="shard"></span></button>
+    <button id="cave-door" aria-label="Подойти к проходу в лабораторию" hidden><span>Дальше</span></button>
+  </section>
+  <p id="hint" role="status" aria-live="polite" hidden></p>
+  <div id="flower-focus" role="dialog" aria-modal="true" aria-label="Картинка внутри цветка" hidden>
+    <button id="flower-close" class="round" aria-label="Вернуться к цветам">×</button>
+    <div class="flower-portrait"><img id="flower-frame" src="assets/flower-open.png" alt="" draggable="false"><button id="flower-picture" aria-label="Я назвал картинку в цветке"><img id="flower-word" alt="" draggable="false"></button></div>
+    <p>Назови картинку и нажми на неё</p>
+  </div>
+  <div id="focus" role="dialog" aria-modal="true" aria-label="Волшебная книга" hidden>
+    <button id="close" class="round" aria-label="Вернуть книгу на полку">×</button>
+    <div id="focus-book">
+      <img class="book-body" src="assets/book.png" alt="" draggable="false">
+      <button id="picture" aria-label="Я назвал картинку" disabled><img id="word-image" alt="" draggable="false"></button>
+      <canvas id="ice" width="480" height="580" aria-label="Сотри лёд движением пальца или мыши"></canvas>
+      <div id="book-glow" aria-hidden="true"></div>
+    </div>
+    <p id="focus-hint" aria-live="polite">Сотри лёд с обложки</p>
+  </div>
+  <section id="ending" hidden><div class="ending-card"><div class="shard large"></div><p class="eyebrow">ПЕРВЫЙ ОСКОЛОК НАЙДЕН</p><h2>Библиотека проснулась!</h2><p>Ты помог Лёве раскрыть тайну четырёх книг.<br>Впереди — ледяная оранжерея.</p><p class="next-note">Продолжение приключения ещё создаётся.</p><button id="again" class="gold">Сыграть ещё раз</button><button id="end-home" class="text-button">В главное меню</button></div></section>
+  <div id="transition" aria-hidden="true"></div>
+  <div id="load-error" role="alert" hidden>Не удалось загрузить иллюстрации. Проверьте соединение и обновите страницу.</div>
+</main>
+<script src="cave.js"></script>
+<script src="greenhouse.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
