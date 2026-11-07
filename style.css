@@ -179,4 +179,8 @@
 #game .forest-fox.happy{animation:none}
 .forest-fox.happy:not(.walk) .fox-idle{display:none}
 .forest-fox.happy:not(.walk) .fox-rearing{display:block;animation:fox-rear 2.2s step-end both}
-@keyframes fox-rear{0%,100%{background-position:0 0}16%{background-position:100% 0}32%{background-position:0 100%}47%{background-position:100% 100%}63%{background-position:0 100%}83%{background-position:100% 0}}
+@keyframes fox-rear{0%,100%{background-position:0 0}16%{background-position:100% 0}32%{background-position:0 100%}47%{background-position:0 100%}63%{background-position:0 100%}83%{background-position:100% 0}}
+
+/* Stay beside the activity; celebrate only when a shard is collected. */
+#game .forest-fox{transition:none}
+#game #final-lyova.forest-fox{left:3%;top:auto;bottom:3%;width:20cqw;height:20cqw}

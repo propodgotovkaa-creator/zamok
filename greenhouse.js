@@ -37,14 +37,14 @@ window.createGreenhouse = function({hint:clearHint,chime,noise,saveLocation,refr
   function tick(now){
     if(!active)return;buttons.forEach(b=>b.classList.remove('heating'));const dt=Math.min((now-lastTime)/1000,.08);lastTime=now;
     if(aim&&matchOn&&!locked&&selected===-1&&!document.hidden){
-      const target=aim;buttons.forEach((b,i)=>{if(s.melt[i]>=1)return;const r=b.getBoundingClientRect(),x=(target.x-r.x)/r.width,y=(target.y-r.y)/r.height;if(x>.08&&x<.92&&y>.02&&y<.8){b.classList.add('heating');s.melt[i]=Math.min(1,s.melt[i]+dt/2.8);paint(i);if(s.melt[i]>=1){s.done.push(i);paint(i);save();$('green-lyova').classList.add('happy');chime();hint('Назови картинку в раскрывшемся цветке.',3500);if(s.done.length===4)awaken();}}});
+      const target=aim;buttons.forEach((b,i)=>{if(s.melt[i]>=1)return;const r=b.getBoundingClientRect(),x=(target.x-r.x)/r.width,y=(target.y-r.y)/r.height;if(x>.08&&x<.92&&y>.02&&y<.8){b.classList.add('heating');s.melt[i]=Math.min(1,s.melt[i]+dt/2.8);paint(i);if(s.melt[i]>=1){s.done.push(i);paint(i);save();chime();hint('Назови картинку в раскрывшемся цветке.',3500);if(s.done.length===4)awaken();}}});
       if(now-lastSave>800){save();lastSave=now;}
     }
     frame=requestAnimationFrame(tick);
   }
   async function awaken(){locked=true;setMatch(false);$('gold-wave').classList.add('shine');$('scene').classList.add('green-awake');chime();await delay(1500);$('tree-shard').hidden=false;locked=false;hint('');}
-  $('tree-shard').onclick=async()=>{if(locked||s.shard)return;locked=true;hint('');$('green-lyova').classList.add('walk');$('green-lyova').style.left='39%';await delay(1800);$('green-lyova').classList.remove('walk');s.shard=true;save();refreshShards();$('tree-shard').hidden=true;$('scene').classList.add('green-unlocked');$('green-door').hidden=false;chime();locked=false;hint('');};
-  $('green-door').onclick=async()=>{if(locked||!s.shard)return;locked=true;hint('');await window.runFoxToDoor('green-lyova','green-door');locked=false;stop();finish();};
+  $('tree-shard').onclick=async()=>{if(locked||s.shard)return;locked=true;hint('');s.shard=true;save();refreshShards();$('tree-shard').hidden=true;$('scene').classList.add('green-unlocked');$('green-door').hidden=false;$('green-lyova').classList.add('happy');chime();await delay(2200);locked=false;hint('');};
+  $('green-door').onclick=async()=>{if(locked||!s.shard)return;locked=true;hint('');locked=false;stop();finish();};
   async function enter(){locked=true;clearHint('');saveLocation();$('transition').classList.add('active');await delay(650);$('library').hidden=true;$('menu').hidden=true;$('ending').hidden=true;$('toolbar').hidden=false;$('greenhouse').hidden=false;$('scene').className='scene greenhouse-bg';window.resetForestFox('green-lyova',7);$('gold-wave').classList.remove('shine');active=true;selected=-1;setMatch(false);build();refreshShards();$('transition').classList.remove('active');lastTime=performance.now();cancelAnimationFrame(frame);frame=requestAnimationFrame(tick);locked=false;noise(.7,.02);hint(s.shard?'Осколок с тобой. Подойди к двери.':s.done.length===4?'Забери осколок внизу.':'Возьми волшебную спичку.',3500);}
   function stop(){active=false;cancelAnimationFrame(frame);aim=null;setMatch(false);save();$('greenhouse').hidden=true;$('flower-focus').hidden=true;selected=-1;}
   function reset(){stop();s={done:[],melt:[0,0,0,0],shard:false};save();}

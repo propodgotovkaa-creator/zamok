@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="ru">
-<head><script>sessionStorage.setItem('logoland-library-v1',JSON.stringify({done:[0,1,2,3],shard:true,sound:false,location:1}));sessionStorage.setItem('logoland-greenhouse-v1',JSON.stringify({done:[0,1,2,3],melt:[1,1,1,1],shard:true}));sessionStorage.setItem('logoland-cave-v2',JSON.stringify({done:[0,1,2],found:[['лес','лебедь','лиса','лейка'],['пальто','мельница','улитка'],['соль','моль','медаль']],shard:true}));sessionStorage.setItem('logoland-lab-v1',JSON.stringify({done:[0,1,2,3,4],shard:true}));window.addEventListener('load',()=>{const t=setInterval(()=>{const b=document.getElementById('start');if(b&&!b.disabled){clearInterval(t);b.click();}},100);});</script>
+<head><script>sessionStorage.setItem('logoland-library-v1',JSON.stringify({done:[0,1,2,3],shard:false,sound:false,location:1}));sessionStorage.setItem('logoland-greenhouse-v1',JSON.stringify({done:[0,1,2,3],melt:[1,1,1,1],shard:true}));sessionStorage.setItem('logoland-cave-v2',JSON.stringify({done:[0,1,2],found:[['лес','лебедь','лиса','лейка'],['пальто','мельница','улитка'],['соль','моль','медаль']],shard:true}));sessionStorage.setItem('logoland-lab-v1',JSON.stringify({done:[0,1,2,3,4],shard:true}));window.addEventListener('load',()=>{const t=setInterval(()=>{const b=document.getElementById('start');if(b&&!b.disabled){clearInterval(t);b.click();}},100);});</script>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#101b38">
   <title>Тайна ледяного замка — Логоленд</title>
-  <link rel="stylesheet" href="style.css?v=soft-fox">
+  <link rel="stylesheet" href="style.css?v=quiet-fox">
 </head>
 <body>
 <main id="game" aria-label="Тайна ледяного замка">
@@ -67,7 +67,7 @@
 <script src="lab.js"></script>
 <script src="cave.js"></script>
 <script src="greenhouse.js?v=forest-fox"></script>
-<script src="fox.js?v=soft-fox"></script>
+<script src="fox.js?v=quiet-fox"></script>
 <script src="game.js"></script>
-<button id="fox-preview-wave" style="position:fixed;left:43%;bottom:2%;z-index:80;border:2px double #d3b477;border-radius:20px;padding:10px 20px;background:#183854;color:#fff2d5">Лёва, помаши!</button><script>document.getElementById('fox-preview-wave').onclick=()=>{const f=[...document.querySelectorAll('.forest-fox')].find(el=>el.getClientRects().length);if(f&&!f.classList.contains('walk')){f.classList.remove('happy');void f.offsetWidth;f.classList.add('happy');}};</script></body>
+</body>
 </html>

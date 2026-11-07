@@ -65,10 +65,10 @@
   $('picture').onclick=async e=>{
     if(e.detail!==0&&(!picturePress||pictureMoved))return;picturePress=null;
     if(busy||current<0||$('picture').disabled)return;if(state.done.includes(current)){closeBook();return;}
-    busy=true;const i=current;$('picture').disabled=true;$('focus-hint').textContent='';$('focus-book').classList.add('opening');chime();noise(.5,.02);await delay(1300);$('game').classList.add('returning');await delay(600);state.done.push(i);save();busy=false;closeBook();render();happy();if(state.done.length===4){await delay(650);chime();hint('Все книги ожили! В большой книге появился осколок.',0);}else hint('Книга вернулась на полку. Найди следующую!',3500);
+    busy=true;const i=current;$('picture').disabled=true;$('focus-hint').textContent='';$('focus-book').classList.add('opening');chime();noise(.5,.02);await delay(1300);$('game').classList.add('returning');await delay(600);state.done.push(i);save();busy=false;closeBook();render();if(state.done.length===4){await delay(650);chime();hint('Все книги ожили! В большой книге появился осколок.',0);}else hint('Книга вернулась на полку. Найди следующую!',3500);
   };
-  $('master').onclick=async()=>{if(busy||state.done.length!==4||state.shard)return;busy=true;hint('');$('lyova').classList.add('walk');$('lyova').style.left='36%';await delay(1900);$('lyova').classList.remove('walk');happy();chime();state.shard=true;save();render();await delay(1000);busy=false;hint('Первый осколок найден! Дверь открылась.',0);};
-  $('door').onclick=async()=>{if(busy||!state.shard)return;busy=true;hint('');await window.runFoxToDoor('lyova','door');busy=false;await greenhouse.enter();};
+  $('master').onclick=async()=>{if(busy||state.done.length!==4||state.shard)return;busy=true;hint('');state.shard=true;save();render();happy();chime();await delay(2200);busy=false;hint('Первый осколок найден! Дверь открылась.',0);};
+  $('door').onclick=async()=>{if(busy||!state.shard)return;busy=true;hint('');busy=false;await greenhouse.enter();};
   finale=window.createFinale({hint,chime,saveLocation:()=>{state.location=5;mode='finale';save();},restart:reset});
   lab=window.createLab({hint,chime,noise,saveLocation:()=>{state.location=4;mode='lab';save();},refreshShards:render,finish:()=>finale.enter()});
   cave=window.createCave({hint,chime,noise,saveLocation:()=>{state.location=3;mode='cave';save();},refreshShards:render,finish:()=>lab.enter()});
