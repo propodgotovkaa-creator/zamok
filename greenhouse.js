@@ -37,7 +37,7 @@ window.createGreenhouse = function({hint:clearHint,chime,noise,saveLocation,refr
   function tick(now){
     if(!active)return;buttons.forEach(b=>b.classList.remove('heating'));const dt=Math.min((now-lastTime)/1000,.08);lastTime=now;
     if(aim&&matchOn&&!locked&&selected===-1&&!document.hidden){
-      const target=aim;buttons.forEach((b,i)=>{if(s.melt[i]>=1)return;const r=b.getBoundingClientRect(),x=(target.x-r.x)/r.width,y=(target.y-r.y)/r.height;if(x>.08&&x<.92&&y>.02&&y<.8){b.classList.add('heating');s.melt[i]=Math.min(1,s.melt[i]+dt/2.8);paint(i);if(s.melt[i]>=1){s.done.push(i);paint(i);save();chime();hint('Назови картинку в раскрывшемся цветке.',3500);if(s.done.length===4)awaken();}}});
+      const target=aim;buttons.forEach((b,i)=>{if(s.melt[i]>=1)return;const r=b.getBoundingClientRect(),x=(target.x-r.x)/r.width,y=(target.y-r.y)/r.height;if(x>.08&&x<.92&&y>.02&&y<.8){b.classList.add('heating');s.melt[i]=Math.min(1,s.melt[i]+dt/2.8);paint(i);if(s.melt[i]>=1){s.done.push(i);paint(i);save();$('green-lyova').classList.add('happy');chime();hint('Назови картинку в раскрывшемся цветке.',3500);if(s.done.length===4)awaken();}}});
       if(now-lastSave>800){save();lastSave=now;}
     }
     frame=requestAnimationFrame(tick);

@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#101b38">
   <title>Тайна ледяного замка — Логоленд</title>
-  <link rel="stylesheet" href="style.css?v=forest-fox">
+  <link rel="stylesheet" href="style.css?v=soft-fox">
 </head>
 <body>
 <main id="game" aria-label="Тайна ледяного замка">
@@ -67,7 +67,7 @@
 <script src="lab.js"></script>
 <script src="cave.js"></script>
 <script src="greenhouse.js?v=forest-fox"></script>
-<script src="fox.js"></script>
+<script src="fox.js?v=soft-fox"></script>
 <script src="game.js"></script>
-</body>
+<button id="fox-preview-wave" style="position:fixed;left:43%;bottom:2%;z-index:80;border:2px double #d3b477;border-radius:20px;padding:10px 20px;background:#183854;color:#fff2d5">Лёва, помаши!</button><script>document.getElementById('fox-preview-wave').onclick=()=>{const f=[...document.querySelectorAll('.forest-fox')].find(el=>el.getClientRects().length);if(f&&!f.classList.contains('walk')){f.classList.remove('happy');void f.offsetWidth;f.classList.add('happy');}};</script></body>
 </html>

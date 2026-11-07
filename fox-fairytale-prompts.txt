@@ -1,0 +1,3 @@
+Built-in imagegen.
+Asset 1: assets/fox-fairytale-sheet.png. Four columns by five rows; top row four idle tail poses, next four rows sixteen incremental quadruped run poses. Soft rounded fairytale fox cub, orange painted fur, cream chest and white tail tip, larger warm eyes, natural fox muzzle and large triangular ears, no clothes; consistent side-view facing right, identical anchors, transparent background.
+Asset 2: assets/fox-rear-sheet.png. Same exact character referenced from asset 1. Two columns by two rows: all four paws, rising chest and lifting front paws, upright on hind paws, waving front paw while upright. Same scale and hind-foot baseline, clear transparent margins.
