@@ -1,0 +1,3 @@
+Built-in imagegen. Parts atlas: assets/fox-rig-parts.png. Reference: fox-rear-sheet.png.
+Create a cutout animation atlas in a 3 by 2 grid: horizontal torso without appendages; head with ears and short neck; leftward white-tipped tail with root at right; front leg; hind leg; cream chest tuft. Preserve the reference fox identity, orange fur, soft painted style. Rounded overlapping joints, no complete characters, transparent background.
+Second pass: remove background only, preserve six parts and positions, eliminate halos, maintain 1536x1024 canvas.
