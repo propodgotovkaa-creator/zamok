@@ -2,8 +2,8 @@
 window.createGreenhouse = function({hint:clearHint,chime,noise,saveLocation,refreshShards,finish}) {
   const hint=()=>{};
   const $=id=>document.getElementById(id), key='logoland-greenhouse-v1';
-  const pictures=['ice-word.png','swan.png','frog.png','leaves.png'];
-  const pictureBoxes=[[148,13,1233,982,1536,1024],[64,16,1289,993,1536,1024],[29,9,1249,1178,1312,1199],[109,9,1270,997,1536,1024]];
+  const pictures=['ice-word.png','swan.png','frog.png','autumn-leaves.png'];
+  const pictureBoxes=[[148,13,1233,982,1536,1024],[64,16,1289,993,1536,1024],[29,9,1249,1178,1312,1199],[196,69,1156,892,1536,1024]];
   const instruction=document.createElement('div');instruction.id='green-spell';instruction.innerHTML='<span>Растопи лёд и проговаривай заклинание:</span><strong>Ля-ля-ля — тает льдинка у меня.</strong>';$('greenhouse').append(instruction);
   const petals=['flower-open.png','flower-rose.png','flower-daisy.png','flower-blue.png'];
   let s={done:[],melt:[0,0,0,0],shard:false};
